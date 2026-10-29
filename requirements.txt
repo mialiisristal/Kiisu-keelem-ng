@@ -1,0 +1,9 @@
+Võiks kasutada: 
+
+    Tkinter 
+
+    Flask 
+
+    Pillow- (heli, kui jääb aega) 
+
+    GitHub 
