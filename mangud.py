@@ -1,3 +1,6 @@
+import random
+import json
+
 # Hangman
 def peida_sona(sona, pakutud_tahed):
   loend = []
@@ -45,8 +48,6 @@ def mangi_hangman(sona):
 
 
 # Kirjuta pildil oleva asja nimi
-import random
-import json
 
 def loe_sonavara(failinimi):
   with open(failinimi, encoding='utf-8') as f:
@@ -76,4 +77,3 @@ def mangi_voor(sonavara, kusimuste_arv):
 if __name__ == "__main__":
   kusimus = vali_kusimus(loe_sonavara("sonavara.json"))
   mangi_hangman(kusimus["sona"])
-
