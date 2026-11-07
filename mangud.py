@@ -1,3 +1,49 @@
+# Hangman
+def peida_sona(sona, pakutud_tahed):
+  loend = []
+  for taht in sona:
+    if taht in pakutud_tahed:
+      loend.append(taht)
+    else:
+      loend.append("_")
+  sone = " ".join(loend)
+  return sone
+
+def loe_valed_pakkumised(sona, pakutud_tahed):
+  valed = []
+  for taht in pakutud_tahed:
+    if taht not in sona:
+      valed.append(taht)
+  return len(valed)
+
+def kas_voidetud(sona, pakutud_tahed):
+  for taht in sona:
+    if taht not in pakutud_tahed:
+      return False
+  return True
+
+def mangi_hangman(sona):
+  pakutud_tahed = []
+  lubatud_vead = 6
+  while True:
+    if loe_valed_pakkumised(sona, pakutud_tahed) >= lubatud_vead:
+      print(f"Kahjuks kaotasid! Õige sõna oli: {sona}")
+      break
+    print(peida_sona(sona, pakutud_tahed))
+    print("Eksimisvõimalusi alles:", lubatud_vead - loe_valed_pakkumised(sona, pakutud_tahed))
+    taht = input("Sisesta üks täht: ").strip().lower()
+    if taht in pakutud_tahed:
+      print("Oled selle tähe juba pakkunud.")
+      continue
+    if len(taht) != 1 or not taht.isalpha():
+      print("Palun sisesta ainult üks täht.")
+      continue
+    pakutud_tahed.append(taht)
+    if kas_voidetud(sona, pakutud_tahed):
+      print(f"Õige! Sõna oli: {sona}")
+      break
+
+
 # Kirjuta pildil oleva asja nimi
 import random
 import json
@@ -28,6 +74,6 @@ def mangi_voor(sonavara, kusimuste_arv):
   return punktid
 
 if __name__ == "__main__":
-  sonavara = loe_sonavara("sonavara.json")
-  punktid = mangi_voor(sonavara, 5)
-  print(f"Tulemus: {punktid}/5")
+  kusimus = vali_kusimus(loe_sonavara("sonavara.json"))
+  mangi_hangman(kusimus["sona"])
+
