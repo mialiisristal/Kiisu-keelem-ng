@@ -1,1 +1,5 @@
-
+[
+  {"sona": "apple", "pilt": "oun.png"},
+  {"sona": "cat", "pilt": "kass.png"},
+  {"sona": "dog", "pilt": "koer.png"}
+]
