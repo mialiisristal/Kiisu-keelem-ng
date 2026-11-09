@@ -1,4 +1,5 @@
-* {box-sizing: border-box;
+* {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
@@ -9,7 +10,12 @@ body {
     display: flex;
     flex-direction: column;
 }
-
+a {
+    text-decoration: none;
+}
+p {
+    font-size: 1rem;
+}
 header {
     display: flex;
     justify-content: space-between;
@@ -35,8 +41,22 @@ nav a {
 }
 
 nav a:hover {
-    color: #e8b8d2;
+    color: #3e2030;
 }
+
+.menüü {
+    background-color: #e8b8d2;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.menüü:hover {
+    background-color: #d4a0c1;
+}
+
 main {
     flex: 1;
     padding: 2rem;
@@ -58,6 +78,8 @@ h1, h2, h3 {
     flex-wrap: wrap;
     gap: 1rem;
     justify-content: center;
+    text-decoration: none;
+
 }
 .card {
     background-color: #fff;
@@ -71,4 +93,15 @@ h1, h2, h3 {
 .card:hover {
     transform: translateY(-5px);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+.hero p {
+    font-size: 0.7rem;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+.pealkiri_menüü {
+    display: flex;
+    justify-content: center;
+    font-size: 3rem;
+    font-weight: bold;
 }
