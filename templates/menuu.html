@@ -1,1 +1,18 @@
+{% extends "base.html" %}
 
+{% block title %}Menüü{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <h1>Menüü</h1>
+    <p>Õpeta kassile inglise keelt!</p>
+    <p>Vali mäng, mida soovid mängida:</p>
+</section>
+
+<section class="mängud">
+    <a class="card" href="/memory">Memory</a>
+    <a class="card" href="/uhendamine">Ühendamine</a>
+    <a class="card" href="/hangman">Hangman</a>
+    <a class="card" href="/nimi">Kirjuta nimi</a>
+</section>
+{% endblock %}
