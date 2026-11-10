@@ -4,10 +4,12 @@
 
 {% block content %}
 <section class="hero">
-    <h1>Menüü</h1>
-    <p>Õpeta kassile inglise keelt!</p>
-    <p>Vali mäng, mida soovid mängida:</p>
+    
+    <p class="menuu">Õpeta kassile inglise keelt!</p>
+    <img class="menuu_kass" src="{{ url_for('static', filename='pildid/kass_õppimas.png') }}" alt="Menüü kass" class="img">
+    <p class="menuu">Vali mäng, mida soovid mängida:</p>
 </section>
+
 
 <section class="mängud">
     <a class="card" href="/memory">Memory</a>

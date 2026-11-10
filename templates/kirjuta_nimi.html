@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Kirjuta nimi{% endblock %}
+
+{% block content %}
+<section class="game">
+    <h1>Mis on sellel pildil?</h1>
+
+    <img src="{{ url_for('static', filename='pildid/' + kusimus.pilt) }}"
+         alt="Mis see on?" style="max-width: 300px;">
+
+    {% if tulemus %}
+        {% if tulemus.oige %}
+            <p class="teade voit">Õige! 🎉</p>
+        {% else %}
+            <p class="teade kaotus">Vale! Õige vastus oli: {{ tulemus.sona }}</p>
+        {% endif %}
+    {% endif %}
+
+    
+
+    <form method="post" action="/nimi/vasta">
+        <input type="text" name="vastus" autofocus required>
+        <button class="nupp" type="submit">Vasta</button>
+    </form>
+</section>
+{% endblock %}

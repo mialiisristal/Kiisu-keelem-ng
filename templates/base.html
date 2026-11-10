@@ -5,17 +5,16 @@
         <title>{% block title %}My App{% endblock %}</title>
         <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
     </head>
 
     <body>
         <header>
-            <a href="/" class="logo">My App</a>
+            <a href="/" class="logo">Catgame</a>
             <button class="menüü">
-                <a href="/">Menüü</a>
-                <a href="/memory">Memory</a>
-                <a href="/uhendamine">Ühendamine</a>
-                <a href="/hangman">Hangman</a>
-                <a href="/nimi">Kirjuta nimi</a>
+                <a class="menüü-link" href="/">Menüü</a>
             </button>
         </header>
 
