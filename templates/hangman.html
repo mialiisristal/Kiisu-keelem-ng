@@ -1,36 +1,31 @@
-<!DOCTYPE html>
-<html lang="et">
-<head>
-    <meta charset="UTF-8">
-    <title>Hangman</title>
-    <link rel="stylesheet" href="../static/style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-</head>
+{% extends "base.html" %}
+{% block title %}Hangman{% endblock %}
 
-<body>
-    <header>
-        <a href="#" class="logo">Catgame</a>
-    <button class="menüü">
-                <a href="/">Menüü</a>
-    </button>
-    </header>
+{% block content %}
+<section class="hangman_mang">
+    <h1>Hangman</h1>
 
-    <main>
-        <section class="hero">
-            <h1 class="pealkiri_menüü">Hangman</h1>
-            
-        </section>
-        
-        <section class="Hangman_box">
+    <div class="elud">{{ "❤️" * alles }}{{ "❤️‍🩹" * (6 - alles) }}</div>
 
-        </section>
-            
-        </section>
-    </main>
+    <img class="hangman_pilt" src="{{ url_for('static', filename='pildid/' + kusimus.pilt) }}" 
+    alt="mis siin on?">
 
-    <footer>
+    <div class="sona">{{ peidetud }}</div>
 
-    </footer>
-</body>
-</html>
+    {% if voit %}
+        <p class="teade voit">Õige!😽</p>
+        <a class="hangman_nupp" href="/hangman/uus">Uus mäng</a>
+    {% elif kaotus %}
+        <p class="teade kaotus">Õige sõna oli: {{sona}}😿</p>
+        <a class="hangman_nupp" href="/hangman/uus">Uus mäng</a>
+    {% else %}
+        <form method="post" action="/hangman/paku" class="klaviatuur">
+            {% for t in "abcdefghijklmnopqrstuvwxyz" %}
+                <button type="submit" name="taht" value="{{ t }}"
+                    {% if t in pakutud %} disabled {% endif %}>{{ t }}</button>
+            {% endfor %}
+        </form>
+    {% endif %}
+</section>
+{% endblock %}
+

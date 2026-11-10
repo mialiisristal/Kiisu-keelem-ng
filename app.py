@@ -7,12 +7,12 @@ from mangud import (
 app = Flask(__name__)
 app.secret_key = "mingi-juhuslik-tekst-siia"
 
-# --- Menüü ---
+#  Menüü 
 @app.route("/")
 def menuu():
     return render_template("menuu.html")
 
-# --- Kirjuta nimi ---
+# Kirjuta nimi 
 @app.route("/nimi")
 def nimi():
     if "nimi_kusimus" not in session:
@@ -24,24 +24,36 @@ def nimi():
     )
 
 @app.route("/nimi/vasta", methods=["POST"])
+
 def nimi_vasta():
-    kusimus = session.pop("nimi_kusimus", None)
+    kusimus = session.get("nimi_kusimus")
     if kusimus:
         oige = kontrolli_vastust(request.form["vastus"], kusimus["sona"])
         session["nimi_tulemus"] = {"oige": oige, "sona": kusimus["sona"]}
     return redirect(url_for("nimi"))
 
-# --- Hangman ---
+@app.route("/nimi/uus") #kustutab mängu info et saaks järgmisele lehele värske infoga minna
+def nimi_uus():
+    session.pop("nimi_kusimus", None)
+    session.pop("nimi_tulemus", None)
+    return redirect(url_for("nimi"))
+
+# Hangman 
 @app.route("/hangman")
 def hangman():
-    if "sona" not in session:
-        session["sona"] = vali_kusimus(loe_sonavara("sonavara.json"))["sona"]
+    if "sona" not in session or "pilt" not in session: #AI
+        kusimus = vali_kusimus(loe_sonavara("sonavara.json"))
+        session["sona"] = kusimus["sona"]
+        session["pilt"] = kusimus["pilt"]
         session["pakutud"] = []
+
     sona = session["sona"]
     pakutud = session["pakutud"]
     valesid = loe_valed_pakkumised(sona, pakutud)
+
     return render_template(
         "hangman.html",
+        kusimus={"pilt": session["pilt"]},
         peidetud=peida_sona(sona, pakutud),
         alles=max(0, 6 - valesid),
         voit=kas_voidetud(sona, pakutud),
@@ -60,9 +72,11 @@ def hangman_paku():
 @app.route("/hangman/uus")
 def hangman_uus():
     session.pop("sona", None)
+    session.pop("sona", None)
+    session.pop("pilt", None)
     return redirect(url_for("hangman"))
 
-# --- Teised lehed (alfaks kohatäited) ---
+# Teised lehed mida praegu veel pole
 @app.route("/memory")
 def memory():
     return render_template("memory.html")
