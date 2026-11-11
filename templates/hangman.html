@@ -1,1 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Hangman{% endblock %}
+
+{% block content %}
+<section class="hangman_mang">
+    <h1>Hangman</h1>
+
+    <div class="elud">{{ "❤️" * alles }}{{ "❤️‍🩹" * (6 - alles) }}</div>
+
+    <img class="hangman_pilt" src="{{ url_for('static', filename='pildid/' + kusimus.pilt) }}" 
+    alt="mis siin on?">
+
+    <div class="sona">{{ peidetud }}</div>
+
+    {% if voit %}
+        <p class="teade voit">Õige!😽</p>
+        <a class="hangman_nupp" href="/hangman/uus">Uus mäng</a>
+    {% elif kaotus %}
+        <p class="teade kaotus">Õige sõna oli: {{sona}}😿</p>
+        <a class="hangman_nupp" href="/hangman/uus">Uus mäng</a>
+    {% else %}
+        <form method="post" action="/hangman/paku" class="klaviatuur">
+            {% for t in "abcdefghijklmnopqrstuvwxyz" %}
+                <button type="submit" name="taht" value="{{ t }}"
+                    {% if t in pakutud %} disabled {% endif %}>{{ t }}</button>
+            {% endfor %}
+        </form>
+    {% endif %}
+</section>
+{% endblock %}
 
